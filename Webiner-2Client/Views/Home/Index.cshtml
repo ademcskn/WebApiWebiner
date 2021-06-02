@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <label>Kategori Adı : </label>
+    <input type="text" id="txtName" />
+    <br />
+    <label>Kategori Açıklaması : </label>
+    <input type="text" id="txtDesc" />
+    <br />
+    <button id="btnAdd">Ekle</button>
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+</body>
+</html>
+
+
+<script>
+    $("#btnAdd").click(function () {
+        var cat = new Object();
+        cat.Name = $("#txtName").val();
+        cat.Description = $("#txtDesc").val();
+        console.log(cat);
+
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            data: cat,
+            url: "https://localhost:44382/api/Category/AddCategory",
+            success: function (result) {
+                if (result == "success") {
+                    alert("eklendi")
+                }
+            }
+        });
+    });
+
+</script>
